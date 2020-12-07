@@ -6,7 +6,8 @@ gameplayTweaks:
    melee-skeletons-with-axes: false   # Whether or not those skeletons should ever have axes
    faster-zombies: false
    no-zombie-babies: true
-   
+   unique-kick-message: true
+
 sounds:
    chatMessages: true
    joinMessages: true
