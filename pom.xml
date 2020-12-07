@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>BerriesJar</groupId>
   <artifactId>BerriesJar</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2</version>
   <name>BerriesJar</name>
   <description>Sweet and prickly tweaks for your modern Minecraft server</description>
   <repositories>
@@ -22,11 +22,6 @@
         <version>1.0.6</version>
         <scope>compile</scope>
      </dependency>
-     <dependency>
-      <groupId>com.jcraft</groupId>
-      <artifactId>jsch</artifactId>
-      <version>0.1.55</version>
-    </dependency>
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
@@ -47,4 +42,6 @@
       </plugin>
     </plugins>
   </build>
+  <url>http://github.com/wolfnt90/berries-jar</url>
+  <inceptionYear>December 6th 2020</inceptionYear>
 </project>

@@ -18,7 +18,7 @@ public class BerriesPlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerSleep(PlayerBedEnterEvent e) {
-		if (!plugin.getConfig().getBoolean("simplifySleep", true))
+		if (!plugin.getConfig().getBoolean("gameplayTweaks.simplifySleep", true))
 			return;
 
 		e.setUseBed(Result.ALLOW);
