@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>BerriesJar</groupId>
   <artifactId>BerriesJar</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.4</version>
   <name>BerriesJar</name>
   <description>Sweet and prickly tweaks for your modern Minecraft server</description>
   <repositories>
