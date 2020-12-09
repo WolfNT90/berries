@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import io.github.wolfnt90.berriesjar.listeners.BerriesMonsterListener;
 import io.github.wolfnt90.berriesjar.listeners.BerriesPlayerListener;
 
-public class Berry extends JavaPlugin {
+public class BerriesJarPlugin extends JavaPlugin {
 
 	public List<Player> playersAsleep = new ArrayList<Player>();
 	public final Random rng = new Random();
@@ -21,7 +21,7 @@ public class Berry extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		if (getDataFolder().mkdir()) {
-			getLogger().info(ChatColor.GOLD + "Thank you! This is your first time running BerriesJar.");
+			getLogger().info(ChatColor.YELLOW + "Thank you! This is your first time running BerriesJar.");
 		}
 		saveDefaultConfig();
 		try {
@@ -31,7 +31,11 @@ public class Berry extends JavaPlugin {
 		}
 		getServer().getPluginManager().registerEvents(new BerriesPlayerListener(this), this);
 		getServer().getPluginManager().registerEvents(new BerriesMonsterListener(this), this);
+	}
 
+	@Override
+	public void onDisable() {
+		this.playersAsleep.clear();
 	}
 
 	public Random getRNGforWorld(long seed) {

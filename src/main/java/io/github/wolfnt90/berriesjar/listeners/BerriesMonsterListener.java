@@ -14,13 +14,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import io.github.wolfnt90.berriesjar.Berry;
+import io.github.wolfnt90.berriesjar.BerriesJarPlugin;
 
 public class BerriesMonsterListener implements Listener {
 
-	private final Berry plugin;
+	private final BerriesJarPlugin plugin;
 
-	public BerriesMonsterListener(Berry berry) {
+	public BerriesMonsterListener(BerriesJarPlugin berry) {
 		this.plugin = berry;
 	}
 
@@ -51,33 +51,28 @@ public class BerriesMonsterListener implements Listener {
 		if (e.getEntityType() == EntityType.SKELETON
 				&& plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons", true)) {
 			final Skeleton skeleton = (Skeleton) e.getEntity();
-			final ItemStack item = skeleton.getEquipment().getItemInMainHand();
-			if (item == null || item.getType() != Material.BOW)
+			if (skeleton.getEquipment().getItemInMainHand() == null
+					|| skeleton.getEquipment().getItemInMainHand().getType() != Material.BOW)
 				return;
 			switch (localRNGInstance.nextInt(9)) {
 			case 6:
 				if (plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons-axe", false)
 						&& localRNGInstance.nextBoolean()) {
-					item.setType(Material.STONE_AXE);
-					skeleton.getEquipment().setItemInMainHand(item);
+					skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_AXE));
 				} else {
-					item.setType(Material.STONE_SWORD);
-					skeleton.getEquipment().setItemInMainHand(item);
+					skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_SWORD));
 				}
 				break;
 			case 7:
 				if (plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons-axe", false)
 						&& localRNGInstance.nextBoolean()) {
-					item.setType(Material.STONE_AXE);
-					skeleton.getEquipment().setItemInMainHand(item);
+					skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_AXE));
 				} else {
-					item.setType(Material.STONE_PICKAXE);
-					skeleton.getEquipment().setItemInMainHand(item);
+					skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_PICKAXE));
 				}
 				break;
 			case 8:
-				item.setType(Material.WOODEN_PICKAXE);
-				skeleton.getEquipment().setItemInMainHand(item);
+				skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.WOODEN_PICKAXE));
 				break;
 			default:
 				break;
