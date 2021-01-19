@@ -20,9 +20,8 @@ public class BerriesJarPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		if (getDataFolder().mkdir()) {
-			getLogger().info(ChatColor.YELLOW + "Thank you! This is your first time running BerriesJar.");
-		}
+		if (getDataFolder().mkdir())
+			getLogger().info(ChatColor.DARK_PURPLE + "Thank you! This is your first time running BerriesJar.");
 		saveDefaultConfig();
 		try {
 			getConfig().load(getDataFolder() + "/config.yml");
@@ -31,15 +30,19 @@ public class BerriesJarPlugin extends JavaPlugin {
 		}
 		getServer().getPluginManager().registerEvents(new BerriesPlayerListener(this), this);
 		getServer().getPluginManager().registerEvents(new BerriesMonsterListener(this), this);
+		getServer().getPluginManager().registerEvents(new BerriesBlockListener(this), this);
+
+		if(getServer().isHardcore() | getConfig().getBoolean("hardcore.enabled", true))
+			getServer().getPluginManager().registerEvents(new BerriesHardcoreListener(this), this);
 	}
 
 	@Override
 	public void onDisable() {
-		this.playersAsleep.clear();
+		playersAsleep.clear();
 	}
 
 	public Random getRNGforWorld(long seed) {
-		this.rng.setSeed(seed);
+		rng.setSeed(seed);
 		return rng;
 	}
 }

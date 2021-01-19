@@ -1,10 +1,8 @@
 package io.github.wolfnt90.berriesjar.listeners;
 
-import java.util.Random;
-
 import org.bukkit.Material;
+import org.bukkit.entity.Animals;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -21,58 +19,61 @@ public class BerriesMonsterListener implements Listener {
 	private final BerriesJarPlugin plugin;
 
 	public BerriesMonsterListener(BerriesJarPlugin berry) {
-		this.plugin = berry;
+		plugin = berry;
 	}
 
 	@EventHandler
 	public void onMonsterSpawn(EntitySpawnEvent e) {
-		if (!(e.getEntity() instanceof LivingEntity))
+		if (e.getEntity() instanceof Animals)
 			return;
-		
-		final Random localRNGInstance = plugin.getRNGforWorld(e.getLocation().getWorld().getSeed());
+
+		var var0 = plugin.getRNGforWorld(e.getLocation().getWorld().getSeed()).nextInt(10);
 		if (e.getEntityType() == EntityType.ZOMBIE) {
-			final Zombie zombie = (Zombie)e.getEntity();
-			if (plugin.getConfig().getBoolean("gameplayTweaks.no-zombie-babies", true)) {
-				zombie.setBaby(false);
-			}
-			if (plugin.getConfig().getBoolean("gameplayTweaks.faster-zombies", false)) {
-				switch (localRNGInstance.nextInt(7)) {
-				case 5:
+			final var zombie = (Zombie) e.getEntity();
+			if (plugin.getConfig().getBoolean("gameplayTweaks.no-zombie-babies", true) && zombie.isBaby())
+				e.setCancelled(true);
+			if (plugin.getConfig().getBoolean("gameplayTweaks.faster-zombies", false))
+				switch (var0) {
+				case 8:
 					zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, 1), true);
 					break;
-				case 6:
+				case 9:
 					zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 99999, 2), true);
 					break;
 				default:
 					break;
 				}
-			}
 		}
 		if (e.getEntityType() == EntityType.SKELETON
 				&& plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons", true)) {
-			final Skeleton skeleton = (Skeleton) e.getEntity();
-			if (skeleton.getEquipment().getItemInMainHand() == null
-					|| skeleton.getEquipment().getItemInMainHand().getType() != Material.BOW)
-				return;
-			switch (localRNGInstance.nextInt(9)) {
+			final var skeleton = (Skeleton) e.getEntity();
+			switch (var0) {
+			case 4:
+				skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.WOODEN_HOE));
+				break;
+			case 5:
+				skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.WOODEN_PICKAXE));
+				break;
 			case 6:
-				if (plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons-axe", false)
-						&& localRNGInstance.nextBoolean()) {
-					skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_AXE));
-				} else {
-					skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_SWORD));
-				}
+				skeleton.getEquipment().setItemInMainHand(
+						new ItemStack(plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons-with-axes", false)
+								? Material.STONE_AXE
+										: Material.WOODEN_HOE));
 				break;
 			case 7:
-				if (plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons-axe", false)
-						&& localRNGInstance.nextBoolean()) {
-					skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_AXE));
-				} else {
-					skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_PICKAXE));
-				}
+				skeleton.getEquipment().setItemInMainHand(
+						new ItemStack(plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons-with-axes", false)
+								? Material.STONE_AXE
+										: Material.WOODEN_PICKAXE));
 				break;
 			case 8:
-				skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.WOODEN_PICKAXE));
+				skeleton.getEquipment().setItemInMainHand(new ItemStack(Material.STONE_SWORD));
+				break;
+			case 9:
+				skeleton.getEquipment().setItemInMainHand(
+						new ItemStack(plugin.getConfig().getBoolean("gameplayTweaks.melee-skeletons-with-axes", false)
+								? Material.STONE_AXE
+										: Material.STONE_SWORD));
 				break;
 			default:
 				break;
