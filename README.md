@@ -1,9 +1,7 @@
+# Updating this soon!
+---
 # BerriesJar
 Sweet and prickly tweaks for your modern Minecraft server
-
-----
-Deprecated until 1.18 or late 1.17 game versions
-----
 
 ![Issues](https://img.shields.io/github/issues/WolfNT90/berriesjar) ![Forks](https://img.shields.io/github/forks/WolfNT90/berriesjar) ![Stars](https://img.shields.io/github/stars/WolfNT90/berriesjar) ![License](https://img.shields.io/github/license/WolfNT90/berriesjar) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/WolfNT90/berriesjar/Java%20CI%20with%20Maven)
 ----
