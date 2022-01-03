@@ -21,6 +21,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Eclipse IDE Specific Files
 .settings
 .classpath
 .project
+
+# Maven Build Dir
+target

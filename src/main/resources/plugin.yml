@@ -1,6 +1,6 @@
 name: BerriesJar
-version: 0.1.9
+version: 0.1.10-SNAPSHOT
 description: Sweet and prickly tweaks for your modern Minecraft server
 author: WolfNT90
 main: io.github.wolfnt90.berriesjar.BerriesJarPlugin
-api-version: 1.14
+api-version: 1.18
